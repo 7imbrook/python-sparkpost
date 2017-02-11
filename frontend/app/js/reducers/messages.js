@@ -6,7 +6,7 @@ export default function (state = [], action) {
       return [
         ...state,
         {
-          ...action.payload,
+          content: action.payload,
           from: BOT,
         },
       ];
@@ -14,7 +14,7 @@ export default function (state = [], action) {
       return [
         ...state,
         {
-          ...action.payload,
+          content: action.payload,
           from: HUMAN,
         },
       ];
