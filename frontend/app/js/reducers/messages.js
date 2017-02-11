@@ -7,6 +7,7 @@ export default function (state = [], action) {
         ...state,
         {
           content: action.payload,
+          timeStamp: new Date(),
           from: BOT,
         },
       ];
@@ -15,6 +16,7 @@ export default function (state = [], action) {
         ...state,
         {
           content: action.payload,
+          timeStamp: new Date(),
           from: HUMAN,
         },
       ];
