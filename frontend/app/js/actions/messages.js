@@ -1,3 +1,5 @@
+import * as io from 'socket.io-client';
+
 export const BOT = 'BOT';
 export const HUMAN = 'HUMAN';
 export const BOT_MESSAGE = 'BOT_MESSAGE';
@@ -12,3 +14,15 @@ export function humanMessage(message) {
     });
   };
 }
+
+const socket = io('http://localhost:3000/api/message');
+
+socket.on('connect', () => {
+    console.log('Yay!');
+
+});
+
+socket.on('message', (msg) => {
+  console.log('data');
+  console.log(msg);
+});
