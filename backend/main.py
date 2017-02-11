@@ -1,6 +1,7 @@
-from flask import Flask, json, request
-
+from flask import Flask, json, request, jsonify
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/status')
 def status():
@@ -10,4 +11,5 @@ def status():
 @app.route('/message', methods=['post'])
 def message():
   print(request.json)
-  return '...'
+  return jsonify(request.json)
+
