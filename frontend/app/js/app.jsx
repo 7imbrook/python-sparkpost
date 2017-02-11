@@ -4,12 +4,14 @@ import { render } from 'react-dom';
 import store from './store';
 import recognition from './recognition';
 
+import '../scss/app.scss';
+
 if (module.hot) module.hot.accept();
 
 window.onload = () => {
   render(
     <Provider store={store}>
-      <div> Hello World </div>
+      <h1> Hello World </h1>
     </Provider>,
     document.getElementById('react'),
   );
