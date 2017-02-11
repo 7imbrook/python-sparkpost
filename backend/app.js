@@ -4,13 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var debug = require('debug')('backend:server');
+var http = require('http');
 var index = require('./routes');
 
 var app = express();
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,4 +35,17 @@ app.use(function(err, req, res, next) {
   res.send(err);
 });
 
-module.exports = app;
+var server = http.createServer(app)
+
+var io = require('socket.io')(server);
+require('./live')(io);
+
+server.on('listening', () => {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+});
+
+server.listen(3000);
