@@ -1,0 +1,38 @@
+@import 'reset';
+@import 'variables';
+
+.input-bar {
+  background-color: $PRIMARY;
+  // height: 30px;
+  .mic-btn {
+    display: inline-block;
+    width: 70px;
+    // border-right: 1px solid $SECONDARY;
+    box-sizing: border-box;
+    padding: 5px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1.3em;
+  }
+
+  .input-container {
+    display: inline-block;
+    width: calc(100% - 70px);
+    box-sizing: border-box;
+    padding: 5px;
+    & input {
+      // height: 50px;
+      outline: none;
+      border: 0;
+      font-size: 1.2em;
+      padding: 5px;
+      border-radius: 7px;
+
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  
+
+}
