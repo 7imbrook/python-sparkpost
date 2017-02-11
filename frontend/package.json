@@ -9,16 +9,15 @@
     "lint": "eslint --ext .js --ext .jsx app",
     "validate": "npm ls"
   },
-  "pre-commit": [
-    "validate",
-    "lint"
-  ],
   "author": "Dylan Vuz",
   "license": "MIT",
   "dependencies": {
     "express": "^4.14.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "abracadabra": "^0.2.1",
