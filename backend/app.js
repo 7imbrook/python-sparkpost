@@ -37,7 +37,7 @@ app.use(function(err, req, res, next) {
 
 var server = http.createServer(app)
 
-var io = require('socket.io')(server, { path: '/api' });
+var io = require('socket.io')(server, { path: '/socket' });
 require('./live')(io);
 
 server.on('listening', () => {

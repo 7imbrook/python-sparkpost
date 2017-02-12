@@ -29,8 +29,8 @@ const matching = {
 
 function onConnection(socket) {
     debug('Connected user');
-    // socket.emit('message', 'How can I help you?');
-    // socket.emit('control', { listen: true });
+    socket.emit('message', 'How can I help you?');
+    socket.emit('control', { listen: true });
 
     let isSpeaking = false;
     socket.on('isSpeaking', (change) => isSpeaking = change);
@@ -68,6 +68,6 @@ module.exports = (io) => {
         }, {});
     debug('Loaded');
     debug(match_functions);
-    io.of('/api/message')
+    io.of('/socket/message')
         .on('connection', onConnection);
 };

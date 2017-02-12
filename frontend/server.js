@@ -11,6 +11,11 @@ const server = new WebpackDevServer(webpack(config), {
     "/api/**": {
           target: "http://localhost:3000/",
           changeOrigin: true,
+          ws: false
+      },
+      "/socket/**": {
+          target: "http://localhost:3000/",
+          changeOrigin: true,
           ws: true
       }
   }

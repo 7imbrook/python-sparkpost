@@ -1,14 +1,17 @@
 http://*:3000 {
   root ./dist/
+
   rewrite {
-    if {path} not_match \/api/.*
+    if {path} not_match \/(api|socket)/.*
     if {file} not_match (.*\.js|.*\.html|.*\.css)
     to /index.html
   }
 
-  proxy /api {
-    upstream backend:3000
-    without /api
+  proxy /api backend:3000
+
+  proxy /socket backend:3000 {
+    transparent
+    websocket
   }
 
 }

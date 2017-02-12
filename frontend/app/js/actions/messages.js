@@ -7,8 +7,8 @@ export const HUMAN = 'HUMAN';
 export const BOT_MESSAGE = 'BOT_MESSAGE';
 export const HUMAN_MESSAGE = 'HUMAN_MESSAGE';
 
-const path = '/api/';
-const socket = io('/api/message', { path });
+const path = '/socket/';
+const socket = io('/socket/message', { path });
 
 socket.on('connect', () => {
     console.log('Yay!');

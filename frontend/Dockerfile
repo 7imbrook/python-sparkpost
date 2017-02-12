@@ -17,5 +17,4 @@ RUN find . -maxdepth 1 \! \( -name dist \) -exec rm -rf '{}' \;
 EXPOSE 3000
 COPY ./caddy /app
 
-CMD caddy
-
+CMD caddy -http2=false
