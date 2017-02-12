@@ -55,16 +55,8 @@ function goodCodeBlock(message, dispatch, getState) {
 }
 
 function betterCodeBlock(message, dispatch, getState) {
-  if (!getState().messages && getState().messages[getState().messages.length - 1].content == message)
-    return;
   const ready = getState().splash;
   if (!ready) {
-    if (message.messageFormat === PLAINTEXT_MESSAGE) {
-      const msg = new SpeechSynthesisUtterance(message.content);
-      dispatch({ type: IS_SPEAKING, speaking: true });
-      window.speechSynthesis.speak(msg);
-      msg.onend = () => dispatch({ type: IS_SPEAKING, speaking: false });
-    }
     return dispatch({
       type: BOT_MESSAGE,
       messageFormat: message.messageFormat,
