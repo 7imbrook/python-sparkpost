@@ -1,48 +1,35 @@
-const   debug = require('debug')('backend:live'),
-        matching = require('./simple_matches');
+const debug = require('debug')('backend:live'),
+      natural = require('natural')
+;
 
-let match_functions;
+const tokenizer = new natural.WordTokenizer();
+natural.LancasterStemmer.attach();
 
-function onConnection(socket) {
-    debug('Connected user');
-    socket.emit('message', 'How can I help you?');
+function handleMessage(message) {
+    const striped = message.replace(/'/, '');
     
-    let isSpeaking = false;
-    socket.on('isSpeaking', (change) => isSpeaking = change);
-
-    function sendResponse(response) {
-        if (!isSpeaking) {
-            socket.emit('message', response);
-        } else {
-            setTimeout(() => sendResponse(response), 200);
-        }
-    }
-
-    // Standard message control
-    socket.on('message', (message) => {
-        socket.emit('control', { listen: false });
-        debug(message);
-        for (const matcher in match_functions) {
-            if (match_functions[matcher](message)) {
-                matching[matcher](message, (response) => {
-                    sendResponse(response);
-                });
-                break;
-            }
-        }
-    });
+    const tokens = striped.tokenizeAndStem();
+    debug(tokens);
 }
 
+function onConnection(socket) {
+    debug('Connected user ' + socket.id);
+    // socket.emit('message', 'Welcome to Sneak Speak.');
+    // socket.emit('message', 'Say something');
+    socket.on('message', handleMessage);
+
+    // Test classes
+    handleMessage('What shoes should I wear today?');
+    handleMessage('How are my shoes?');
+    handleMessage('I want to run today.');
+    handleMessage('I\'m going for a run today');
+    handleMessage('I\'ve got a date later');
+    handleMessage('Whats new?');
+    handleMessage('Let\'s go old school today');
+}
 
 module.exports = (io) => {
-    match_functions = Object.keys(matching)
-        .filter(key => !key.match(/.*_match/))
-        .reduce((acc, fn_name) => {
-            acc[fn_name] = matching[fn_name + '_match'];
-            return acc;
-        }, {});
     debug('Loaded');
-    debug(match_functions);
     io.of('/socket/message')
         .on('connection', onConnection);
 };
