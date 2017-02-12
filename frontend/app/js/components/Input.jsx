@@ -32,14 +32,14 @@ class Input extends React.Component {
   handleMicClick() {
     if (this.state.listening) {
       this.setState({
-        listening: false
+        listening: false,
       });
-      return this.props.stopListening();
+      return this.props.onStopListening();
     }
 
     this.setState({
       listening: true,
-      value: ""
+      value: '',
     });
 
     return this.props.onListening();
@@ -76,13 +76,13 @@ class Input extends React.Component {
 Input.propTypes = {
   onChange: React.PropTypes.func,
   onListening: React.PropTypes.func,
-  stopListening: React.PropTypes.func,
+  onStopListening: React.PropTypes.func,
 };
 
 Input.defaultProps = {
   onChange: () => {},
   onListening: () => {},
-  stopListening: () => {},
+  onStopListening: () => {},
 };
 
 export default Input;
