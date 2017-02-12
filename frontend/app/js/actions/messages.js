@@ -31,6 +31,7 @@ socket.on('control', (msg) => {
 
 function robotMessage(message) {
   return (dispatch) => {
+    // Emit isSpeaking
     const msg = new SpeechSynthesisUtterance(message);
     window.speechSynthesis.speak(msg);
     return dispatch({
