@@ -7,7 +7,7 @@ const Message = props => (
     <div className="from">{props.from === BOT ? 'Sneak Advisor' : 'Joey D from Long Island'}</div>
     <div className="body">
       <div className="content">{props.content}</div>
-      <div className="timeStamp">{props.timeStamp}</div>
+      <div className="timeStamp">{`${props.timeStamp.toLocaleDateString()} ${props.timeStamp.toTimeString().split(' ')[0]}`}</div>
     </div>
   </div>
 );
@@ -15,7 +15,7 @@ const Message = props => (
 Message.propTypes = {
   from: React.PropTypes.string.isRequired,
   content: React.PropTypes.string.isRequired,
-  timeStamp: React.PropTypes.string.isRequired,
+  timeStamp: React.PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default Message;
