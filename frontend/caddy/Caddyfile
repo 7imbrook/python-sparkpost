@@ -3,7 +3,7 @@ http://*:3000 {
 
   rewrite {
     if {path} not_match \/(api|socket)/.*
-    if {file} not_match (.*\.js|.*\.html|.*\.css|.*\.png)
+    if {file} not_match (.*\.js|.*\.html|.*\.css|.*\.png|.*\.jpg)
     to /index.html
   }
 
