@@ -19,7 +19,52 @@ class Messages extends React.Component {
   }
 
   render() {
-    const messages = this.props.messages.map(message =>
+    const messages = this.props.messages.map((message, index, messages) => { // eslint-disable-line
+      if (this.props.messages.length > 1) {
+        if (index === 0) {
+          if (message.from === messages[1].from) {
+            return {
+              ...message,
+              group: true,
+              first: true,
+            };
+          }
+        } else if (index === this.props.messages.length - 1) {
+          if (message.from === messages[index - 1].from) {
+            return {
+              ...message,
+              group: true,
+              last: true,
+            };
+          }
+        } else if (index !== this.props.messages.length - 1) {
+          if (message.from === messages[index + 1].from) {
+            if (message.from === messages[index - 1].from) {
+              return {
+                ...message,
+                middle: true,
+                group: true,
+              };
+            }
+          } else if (message.from === messages[index - 1].from) {
+            return {
+              ...message,
+              group: true,
+              last: true,
+            };
+          }
+          return {
+            ...message,
+            first: true,
+            group: true,
+          };
+        }
+      }
+      return {
+        ...message,
+        group: false,
+      };
+    }).map(message =>
       (<Message
         key={message.id}
         {...message}

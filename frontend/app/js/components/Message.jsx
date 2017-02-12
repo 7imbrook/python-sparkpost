@@ -24,7 +24,7 @@ function generateMessageBody(message) {
 }
 
 const Message = props => (
-  <div className={`message ${props.from === BOT ? 'bot' : 'human'}`}>
+  <div className={`message ${props.from === BOT ? 'bot' : 'human'} ${props.group ? 'group' : ''} ${props.first ? 'first' : ''} ${props.middle ? 'middle' : ''} ${props.last ? 'last' : ''}`}>
     <div className="from">{props.from === BOT ? 'Sneak Advisor' : 'Joey D from Long Island'}</div>
     <div className="body">
       {generateMessageBody(props)}
@@ -35,8 +35,19 @@ const Message = props => (
 
 Message.propTypes = {
   from: React.PropTypes.string.isRequired,
+  group: React.PropTypes.bool,
+  first: React.PropTypes.bool,
+  middle: React.PropTypes.bool,
+  last: React.PropTypes.bool,
   // content: React.PropTypes.string.isRequired,
   timeStamp: React.PropTypes.object.isRequired, // eslint-disable-line
+};
+
+Message.defaultProps = {
+  group: false,
+  first: false,
+  middle: false,
+  last: false,
 };
 
 export default Message;

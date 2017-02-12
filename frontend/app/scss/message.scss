@@ -41,6 +41,30 @@
     margin: 0px 10px;
     margin-bottom: 12px;
   }
+  &.group.first {
+    .body {
+      margin-bottom: 5px;
+    }
+    .timeStamp {
+      display: none;
+    }
+  }
+  &.group.middle {
+    .body {
+      margin-bottom: 5px;
+    }
+    .timeStamp {
+      display: none;
+    }
+    .from {
+      display: none;
+    }
+  }
+  &.group.last {
+    .from {
+      display: none;
+    }
+  }
   &.bot .body {
     float: left;
     background-color: $SECONDARY;
