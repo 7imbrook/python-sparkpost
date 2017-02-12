@@ -1,5 +1,6 @@
 import React from 'react';
 import Message from './Message';
+import Summary from './Summary';
 
 class Messages extends React.Component {
   static propTypes = {
@@ -15,12 +16,17 @@ class Messages extends React.Component {
   }
 
   render() {
-    const messages = this.props.messages.map(message => (
-      <Message key={message.timeStamp.toString()} {...message} />
-    ));
+    const messages = this.props.messages.map(message => {
+      if(true) {
+        return <Message key={message.timeStamp.toString()} {...message} />;
+      }
+      else {
+        return <Summary />
+      }
+    });
 
     return (
-      <div ref={(c) => { this.scroll = c; }} className="messages">
+      <div ref={(c) => { this.scroll = c; }} className="messages">      
         {messages}
       </div>
     );
