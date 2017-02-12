@@ -28,10 +28,9 @@ class Messages extends React.Component {
     });
 
     return (
-      <div 
-        className="messages"     
-        ref={(c) => { this.scroll = c;}}
+      <div
         className="messages"
+        ref={(c) => { this.scroll = c}}
       >
         <ReactCSSTransitionGroup
           component="div"
