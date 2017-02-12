@@ -1,9 +1,11 @@
 @import 'variables';
 
 .messages {
-  height: 90vh;
+  height: calc(100% - 50px);
   overflow-x: hidden;
   overflow-y: scroll;
+  padding-top: 20px;
+  box-sizing: border-box;
 }
 
 .message {
