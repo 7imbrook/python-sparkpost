@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Input from '../components/Input';
 import { startListening, stopListening } from '../actions/listen';
+import { humanMessage } from '../actions/messages';
 
 function mapStateToProps(store) {
   return {
@@ -12,6 +13,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onListening: () => dispatch(startListening()),
     onStopListening: () => dispatch(stopListening()),
+    onChange: (value) => dispatch(humanMessage(value)),
   };
 }
 

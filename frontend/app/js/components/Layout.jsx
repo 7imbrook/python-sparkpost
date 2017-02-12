@@ -3,7 +3,7 @@ import NavBar from './NavBar';
 import Chat from './Chat';
 
 const Layout = () => (
-  <div>
+  <div className="layout">
     <NavBar />
     <Chat />
   </div>

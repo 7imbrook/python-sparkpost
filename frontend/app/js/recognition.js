@@ -18,6 +18,7 @@ recognition.onresult = (event) => {
   for (var i = event.resultIndex; i < event.results.length; ++i) {
     if (event.results[i].isFinal) {
       store.dispatch(humanMessage(event.results[i][0].transcript));
+      store.dispatch(stopListening());
     }
   }
 };
