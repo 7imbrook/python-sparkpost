@@ -1,12 +1,12 @@
 import React from 'react';
 import Messages from './Messages';
-import Input from './Input';
+import InputContainer from '../containers/InputContainer';
 
 const Chat = () => (
   <div>
     Chat
     <Messages />
-    <Input />
+    <InputContainer />
   </div>
 );
 

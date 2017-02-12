@@ -5,8 +5,7 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      listening: false,
+      value: ''
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -30,18 +29,9 @@ class Input extends React.Component {
   }
 
   handleMicClick() {
-    if (this.state.listening) {
-      this.setState({
-        listening: false,
-      });
+    if (this.props.listening) {
       return this.props.onStopListening();
     }
-
-    this.setState({
-      listening: true,
-      value: '',
-    });
-
     return this.props.onListening();
   }
 
@@ -59,12 +49,12 @@ class Input extends React.Component {
         <div className="input-container">
           <div className="input-bar">
             <input
-              placeholder={this.state.listening ? 'Listening...' : 'Type Something...'}
+              placeholder={this.props.listening ? 'Listening...' : 'Type Something...'}
               type="text"
               value={this.state.value}
               onChange={this.handleInputChange}
               onKeyPress={this.handleKeyPress}
-              disabled={this.state.listening}
+              disabled={this.props.listening}
             />
           </div>
         </div>
@@ -74,12 +64,14 @@ class Input extends React.Component {
 }
 
 Input.propTypes = {
+  listening: React.PropTypes.bool,
   onChange: React.PropTypes.func,
   onListening: React.PropTypes.func,
   onStopListening: React.PropTypes.func,
 };
 
 Input.defaultProps = {
+  listening: false,
   onChange: () => {},
   onListening: () => {},
   onStopListening: () => {},
