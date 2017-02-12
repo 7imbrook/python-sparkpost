@@ -7,17 +7,17 @@ module.exports = (day, mood) => {
     const now = moment();
     const request_date = moment(day);
 
-    return simpleWeather["v2.5"].current.byCityName("Rochester", "ny").then(res => {
-        
-        const weather = res.weather.map(forcast => forcast.description).join('/');
-
+    // return simpleWeather["v2.5"].current.byCityName("Rochester", "ny").then(res => {
+    return new Promise((acc, res) => {
+        // const weather = res.weather.map(forcast => forcast.description).join('/');
+        const weather = 'overcast and cloudy';
         // Same day
         if (now.isSame(request_date, 'day') ) {
 
-            return { 
+            return acc({ 
                 message: `Today looks ${weather}, you should where your Vans`,
                 image: 'https://s-media-cache-ak0.pinimg.com/originals/ce/c4/24/cec4240b9bd572dffa468969bfaae688.jpg'
-            };
+            });
 
         }
 
