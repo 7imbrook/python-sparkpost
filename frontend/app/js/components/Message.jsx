@@ -2,6 +2,7 @@ import React from 'react';
 import { BOT, PLAINTEXT_MESSAGE, IMAGE_MESSAGE } from '../actions/messages';
 import '../../scss/message.scss';
 import PlaintextMessage from './messageTypes/PlaintextMessage';
+import ImageMessage from './messageTypes/ImageMessage';
 
 function generateMessageBody(message) {
   switch (message.messageFormat) {
@@ -13,7 +14,9 @@ function generateMessageBody(message) {
       );
     case IMAGE_MESSAGE:
       return (
-        <div>image..</div>
+        <ImageMessage
+          content={message.content}
+        />
       );
     default:
       return (<div>unknown message format</div>);

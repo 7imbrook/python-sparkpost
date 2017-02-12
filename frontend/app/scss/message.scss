@@ -28,11 +28,18 @@
   .content {
     font-size: 16px;
   }
+  .img-content {
+    & img {
+      max-width: 55%;
+    }
+  }
   .timeStamp {
     color: $GREY;
     font-size: 12px;
     text-align: right;
     font-style: italic;
+    margin: 0px 10px;
+    margin-bottom: 12px;
   }
   &.bot .body {
     float: left;
@@ -51,6 +58,14 @@
     text-align: right;
     margin-right: 25px;
     font-weight: bold;
+  }
+  &.bot .timeStamp {
+    float: left;
+    clear: both;
+  }
+  &.human .timeStamp {
+    float: right;
+    clear: both;
   }
   &:after {
     clear: both;

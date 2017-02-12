@@ -2,6 +2,9 @@ import * as io from 'socket.io-client';
 import store from '../store';
 import { startListening, stopListening } from './listen';
 
+// todo remove
+import SneakerPic from '../../img/iridescent-sneakers.jpeg';
+
 export const BOT = 'BOT';
 export const HUMAN = 'HUMAN';
 export const BOT_MESSAGE = 'BOT_MESSAGE';
@@ -19,7 +22,10 @@ socket.on('connect', () => {
 });
 
 socket.on('message', (msg) => {
-  store.dispatch(robotMessage(msg));
+  store.dispatch(robotMessage({
+    messageFormat: PLAINTEXT_MESSAGE,
+    content: msg,
+  }));
 });
 
 socket.on('control', (msg) => {
@@ -37,13 +43,20 @@ socket.on('image', (img) => {
   }));
 });
 
+// store.dispatch(robotMessage({
+//   messageFormat: IMAGE_MESSAGE,
+//   content: SneakerPic,
+// }));
+
 function robotMessage(message) {
   return (dispatch) => {
     // Emit isSpeaking
-    const msg = new SpeechSynthesisUtterance(message);
-    dispatch({ type: IS_SPEAKING, speaking: true });
-    window.speechSynthesis.speak(msg);
-    msg.onend = () => dispatch({ type: IS_SPEAKING, speaking: false });
+    if(message.messageFormat === PLAINTEXT_MESSAGE) {
+      const msg = new SpeechSynthesisUtterance(message.content);
+      dispatch({ type: IS_SPEAKING, speaking: true });
+      window.speechSynthesis.speak(msg);
+      msg.onend = () => dispatch({ type: IS_SPEAKING, speaking: false });
+    }
     return dispatch({
       type: BOT_MESSAGE,
       messageFormat: message.messageFormat,
