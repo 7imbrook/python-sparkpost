@@ -16,7 +16,7 @@ class Messages extends React.Component {
 
   render() {
     const messages = this.props.messages.map(message => (
-      <Message key={message.content} {...message} />
+      <Message key={message.timeStamp.toString()} {...message} />
     ));
 
     return (
