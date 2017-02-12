@@ -95,8 +95,10 @@
     width: auto;
     background-color: transparent;
     padding: 0;
+    max-width: 80%;
     img {
       border-radius: 10px;
+      width: 100%;
     }
   }
 }
