@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', index);
+app.use('/api', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,7 +37,7 @@ app.use(function(err, req, res, next) {
 
 var server = http.createServer(app)
 
-var io = require('socket.io')(server);
+var io = require('socket.io')(server, { path: '/socket' });
 require('./live')(io);
 
 server.on('listening', () => {

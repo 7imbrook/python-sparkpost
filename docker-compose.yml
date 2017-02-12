@@ -1,0 +1,8 @@
+version: '3'
+services:
+    frontend:
+        image: 7imbrook/sneak-speak:frontend
+        ports:
+            - 80:3000
+    backend:
+        image: 7imbrook/sneak-speak:backend
