@@ -9,6 +9,7 @@ export default function (state = [], action) {
           content: action.payload,
           timeStamp: new Date(),
           from: BOT,
+          id: state.length + 1,
         },
       ];
     case HUMAN_MESSAGE:
@@ -18,6 +19,7 @@ export default function (state = [], action) {
           content: action.payload,
           timeStamp: new Date(),
           from: HUMAN,
+          id: state.length + 1,
         },
       ];
     default:
