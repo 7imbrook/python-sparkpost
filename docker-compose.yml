@@ -4,5 +4,13 @@ services:
         image: 7imbrook/sneak-speak:frontend
         ports:
             - 80:3000
+        deploy:
+            replicas: 1
+            placement:
+                constraints:
+                    - node.labels.edge==true
     backend:
         image: 7imbrook/sneak-speak:backend
+        deploy:
+            replicas: 1
+        

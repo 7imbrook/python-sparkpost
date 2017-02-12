@@ -10,6 +10,7 @@ http://*:3000 {
   proxy /api backend:3000
 
   proxy /socket backend:3000 {
+    keepalive 0
     transparent
     websocket
   }
