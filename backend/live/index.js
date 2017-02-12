@@ -2,7 +2,8 @@ require('isomorphic-fetch');
 const debug = require('debug')('backend:live'),
       apiai = require('apiai'),
       querystring = require('querystring').stringify,
-      flatMap = require('flatmap')
+      flatMap = require('flatmap'),
+      recommend = require('./recomendations')
 ;
 
 const app = apiai(process.env.APIAI_TOKEN);
@@ -18,7 +19,6 @@ function handleMessage(message, sessionId) {
         });
         request.on('response', (response) => {
             contexts_hold['sessionId'] = response.result.contexts;
-            debug(response.result);
             debug(response.result.parameters);
             debug(response.result.fulfillment);
             switch (response.result.action) {
@@ -71,13 +71,16 @@ function handleMessage(message, sessionId) {
                 } break;
                 case 'recommend':
                 {
-                    if (response.result) {
+                    if (response.result.actionIncomplete) {
                         acc({
                             message: response.result.fulfillment.speech,
                             control: {
                                 listen: true
                             }
                         });
+                    } else {
+                        const params = response.result.parameters;
+                        recommend(params.date, params.mood).then(acc);
                     }
                 } break;
                 default:

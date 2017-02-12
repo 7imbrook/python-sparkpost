@@ -66,9 +66,9 @@ class Messages extends React.Component {
       };
     }).map(message =>
       (<Message
-        key={message.id}
-        {...message}
-      />)
+          key={message.id}
+          {...message}
+        />)
     );
 
     return (
