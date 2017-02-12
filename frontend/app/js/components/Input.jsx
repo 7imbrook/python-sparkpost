@@ -5,22 +5,84 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      value: '',
+      listening: false,
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleMicClick = this.handleMicClick.bind(this);
+  }
+
+  handleInputChange(event) {
+    this.setState({
+      value: event.target.value,
+    });
+  }
+
+  handleKeyPress(event) {
+    if (event.charCode === 13 && this.state.value.length > 0) {
+      this.props.onChange(this.state.value);
+      this.setState({
+        value: '',
+      });
+    }
+  }
+
+  handleMicClick() {
+    if (this.state.listening) {
+      this.setState({
+        listening: false
+      });
+      return this.props.stopListening();
+    }
+
+    this.setState({
+      listening: true,
+      value: ""
+    });
+
+    return this.props.onListening();
   }
 
   render() {
     return (
       <div className="input-bar">
-        <div className="mic-btn">
-          <i className="fa fa-microphone" />
-        </div>
+        <button
+          className="mic-btn"
+          onClick={this.handleMicClick}
+        >
+          <div className="mic-glyph">
+            <i className="fa fa-microphone" />
+          </div>
+        </button>
         <div className="input-container">
-          <input type="text" />
+          <div className="input-bar">
+            <input
+              placeholder={this.state.listening ? 'Listening...' : 'Type Something...'}
+              type="text"
+              value={this.state.value}
+              onChange={this.handleInputChange}
+              onKeyPress={this.handleKeyPress}
+              disabled={this.state.listening}
+            />
+          </div>
         </div>
       </div>
     );
   }
 }
+
+Input.propTypes = {
+  onChange: React.PropTypes.func,
+  onListening: React.PropTypes.func,
+  stopListening: React.PropTypes.func,
+};
+
+Input.defaultProps = {
+  onChange: () => {},
+  onListening: () => {},
+  stopListening: () => {},
+};
 
 export default Input;
