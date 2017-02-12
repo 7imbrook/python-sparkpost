@@ -1,0 +1,14 @@
+http://*:3000 {
+  root ./dist/
+  rewrite {
+    if {path} not_match \/api/.*
+    if {file} not_match (.*\.js|.*\.html|.*\.css)
+    to /index.html
+  }
+
+  proxy /api {
+    upstream backend:3000
+    without /api
+  }
+
+}

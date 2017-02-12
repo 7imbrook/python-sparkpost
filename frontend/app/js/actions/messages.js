@@ -7,7 +7,8 @@ export const HUMAN = 'HUMAN';
 export const BOT_MESSAGE = 'BOT_MESSAGE';
 export const HUMAN_MESSAGE = 'HUMAN_MESSAGE';
 
-const socket = io('http://localhost:3000/api/message');
+const path = '/api/';
+const socket = io('/api/message', { path });
 
 socket.on('connect', () => {
     console.log('Yay!');
