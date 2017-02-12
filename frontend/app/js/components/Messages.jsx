@@ -46,6 +46,11 @@ class Messages extends React.Component {
                 group: true,
               };
             }
+            return {
+              ...message,
+              first: true,
+              group: true,
+            };
           } else if (message.from === messages[index - 1].from) {
             return {
               ...message,
@@ -53,11 +58,6 @@ class Messages extends React.Component {
               last: true,
             };
           }
-          return {
-            ...message,
-            first: true,
-            group: true,
-          };
         }
       }
       return {
@@ -66,9 +66,9 @@ class Messages extends React.Component {
       };
     }).map(message =>
       (<Message
-          key={message.id}
-          {...message}
-        />)
+        key={message.id}
+        {...message}
+      />)
     );
 
     return (
