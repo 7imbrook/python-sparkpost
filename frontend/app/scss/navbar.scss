@@ -1,0 +1,13 @@
+@import 'reset';
+@import 'variables';
+
+.navbar {
+  background-color: $PRIMARY;
+  height: 50px;
+  padding: 5px;
+  text-align: center;
+  box-sizing: border-box;
+  .nav-logo {
+    height: 100%;
+  }
+}

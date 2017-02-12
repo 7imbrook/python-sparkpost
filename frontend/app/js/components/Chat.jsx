@@ -1,11 +1,11 @@
 import React from 'react';
 import Messages from '../containers/Messages';
-import Input from './Input';
+import InputContainer from '../containers/InputContainer';
 
 const Chat = () => (
   <div>
     <Messages />
-    <Input />
+    <InputContainer />
   </div>
 );
 
