@@ -8,12 +8,13 @@ module.exports = (day, mood) => {
     const request_date = moment(day);
 
     return simpleWeather["v2.5"].current.byCityName("Rochester", "ny").then(res => {
-        debug(res);
+        
+        const weather = res.weather.map(forcast => forcast.description).join('/');
 
         // Same day
         if (now.isSame(request_date, 'day') ) {
 
-            return { message: 'How about your Vans' };
+            return { message: `Today looks ${weather}, you should where your Vans` };
 
         }
 
