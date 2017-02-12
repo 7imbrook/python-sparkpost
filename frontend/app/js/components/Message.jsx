@@ -26,7 +26,7 @@ function generateMessageBody(message) {
 const Message = props => (
   <div className={`message ${props.from === BOT ? 'bot' : 'human'} ${props.group ? 'group' : ''} ${props.first ? 'first' : ''} ${props.middle ? 'middle' : ''} ${props.last ? 'last' : ''}`}>
     <div className="from">{props.from === BOT ? 'Sneak Advisor' : 'Joey D from Long Island'}</div>
-    <div className="body">
+    <div className={`body ${props.messageFormat === IMAGE_MESSAGE ? 'image' : ''}`}>
       {generateMessageBody(props)}
     </div>
     <div className="timeStamp">{`${props.timeStamp.toLocaleDateString()} ${props.timeStamp.toTimeString().split(' ')[0]}`}</div>

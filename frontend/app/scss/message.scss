@@ -28,11 +28,6 @@
   .content {
     font-size: 16px;
   }
-  .img-content {
-    & img {
-      max-width: 55%;
-    }
-  }
   .timeStamp {
     color: $GREY;
     font-size: 12px;
@@ -95,5 +90,13 @@
     clear: both;
     content: ' ';
     display: block;
+  }
+  .body.image {
+    width: auto;
+    background-color: transparent;
+    padding: 0;
+    img {
+      border-radius: 10px;
+    }
   }
 }
