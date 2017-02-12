@@ -13,4 +13,5 @@ services:
         image: 7imbrook/sneak-speak:backend
         deploy:
             replicas: 1
-        
+        environment:
+            - APIAI_TOKEN_FILE=/run/secrets/api_client_token

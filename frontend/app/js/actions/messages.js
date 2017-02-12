@@ -1,11 +1,12 @@
 import * as io from 'socket.io-client';
 import store from '../store';
-import { START_LISTENING, STOP_LISTENING } from './listen';
+import { startListening, stopListening } from './listen';
 
 export const BOT = 'BOT';
 export const HUMAN = 'HUMAN';
 export const BOT_MESSAGE = 'BOT_MESSAGE';
 export const HUMAN_MESSAGE = 'HUMAN_MESSAGE';
+export const IS_SPEAKING = 'IS_SPEAKING';
 
 const path = '/socket/';
 const socket = io('/socket/message', { path });
@@ -20,13 +21,9 @@ socket.on('message', (msg) => {
 
 socket.on('control', (msg) => {
   if (msg.listen) {
-    store.dispatch({
-      type: START_LISTENING,
-    });
+    store.dispatch(startListening());
   } else {
-    store.dispatch({
-      type: STOP_LISTENING,
-    });
+    store.dispatch(stopListening());
   }
 });
 
@@ -34,7 +31,9 @@ function robotMessage(message) {
   return (dispatch) => {
     // Emit isSpeaking
     const msg = new SpeechSynthesisUtterance(message);
+    dispatch({ type: IS_SPEAKING, speaking: true });
     window.speechSynthesis.speak(msg);
+    msg.onend = () => dispatch({ type: IS_SPEAKING, speaking: false });
     return dispatch({
       type: BOT_MESSAGE,
       payload: message
@@ -44,7 +43,6 @@ function robotMessage(message) {
 
 export function humanMessage(message) {
   return (dispatch) => {
-    console.log(message);
     socket.emit('message', message);
     return dispatch({
       type: HUMAN_MESSAGE,
