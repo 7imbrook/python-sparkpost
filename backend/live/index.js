@@ -121,7 +121,7 @@ function handleMessage(message, sessionId) {
 
 function onConnection(socket) {
     debug('Connected user ' + socket.id);
-    // socket.emit('message', 'Welcome to Sneak Speak.');
+    socket.emit('message', 'Welcome to Sneak Speak. Talk to me about shoes!');
     // socket.emit('message', 'Say something');
     socket.on('message', (msg) => {
         handleMessage(msg, socket.id)
