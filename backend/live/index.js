@@ -42,17 +42,17 @@ function handleMessage(message, sessionId) {
                             case 'crocs':
                                 return acc({
                                     image: 'https://images-na.ssl-images-amazon.com/images/I/41WQ1N0SmZL._SX395_.jpg',
-                                    message: 'How\'s this classic'
+                                    message: 'This lady killer will surely be a hit.'
                                 });
                             case 'skechers':
                                 return acc({
                                     image: 'https://images-na.ssl-images-amazon.com/images/G/01/AMAZON_FASHION/2015/MISC/ANIMATED/KIDS_SHOES_TEST_V2/boys_SkechersGamer.gif',
-                                    message: 'How\'s this classic'
+                                    message: 'Just out of this world.'
                                 });
                             case 'nike':
                                 return acc({
                                     image: 'https://s3.amazonaws.com/nikeinc/assets/54343/FY16_INNO_SNOWCAP_v2_HERO_RT_NoEarl_V1_hd_1600.jpg?1458138886',
-                                    message: 'How\'s this classic'
+                                    message: 'Just do it alread.'
                                 });
                         }
                         // debug('searching');
