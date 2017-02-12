@@ -13,6 +13,10 @@ after@0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
 
+apiai@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/apiai/-/apiai-4.0.0.tgz#59c1f327bff2e0b546e389ae32203da253224d51"
+
 "apparatus@>= 0.0.9":
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/apparatus/-/apparatus-0.0.9.tgz#37dcd25834ad0b651076596291db823eeb1908bd"
