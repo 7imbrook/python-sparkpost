@@ -1,13 +1,35 @@
 @import 'variables';
 
+.messages {
+  height: 90vh;
+  overflow: scroll;
+}
+
 .message {
   width: 100%;
   .body {
     width: 55%;
-    margin: 10px;
     display: block;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    margin-top: 0px;
+  }
+  .from {
+    width: 55%;
+    display: block;
+    font-size: 14px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+  }
+  .content {
+    font-size: 16px;
+  }
+  .timeStamp {
+    color: $GREY;
+    font-size: 12px;
+    text-align: right;
+    font-style: italic;
   }
   &.bot .body {
     float: left;
@@ -16,6 +38,14 @@
   &.human .body {
     float: right;
     background-color: $TERTIARY;
+  }
+  &.bot .from {
+    float: left;
+  }
+  &.human .from {
+    float: right;
+    text-align: right;
+    margin-right: 25px;
   }
   &:after {
     clear: both;
