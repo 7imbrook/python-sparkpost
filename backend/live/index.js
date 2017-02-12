@@ -35,7 +35,7 @@ function handleMessage(message, sessionId) {
                     } else {
                         debug('searching');
                         const query = querystring({
-                            q: 'image shoe ' + response.result.parameters.brand,
+                            q: response.result.parameters.brand + ' shoe',
                             key: 'AIzaSyBLFZunayhJJv_opd5endbUJROby0c9N90',
                             cx: '003527602726096819603:zhnvulhmery',
                             fields: 'items/pagemap/imageobject(description,contenturl,name)',
@@ -44,19 +44,27 @@ function handleMessage(message, sessionId) {
                             .then(res => res.json())
                             .then(images => {
                                 const image_urls = flatMap(images.items, item => item.pagemap.imageobject.map(image => image));
-                                return image_urls.filter(img => img.contenturl && img.description && img.name)
+                                const soft_filter = image_urls.filter(img => img.contenturl);
+                                const hard_filter = image_urls.filter(img => img.contenturl && (img.description || img.name));
+                                return hard_filter.length > 0 ? hard_filter : soft_filter;
                             })
-                            .then(res => res[0])
+                            .then(res => {
+                                if (res.length > 0) {
+                                    return res[0]
+                                } else {
+                                    throw 'No Results';
+                                }
+                            })
                             .then(result => {
                                 acc({
-                                    message: result.description,
+                                    message: result.description || result.name || 'Here is what I found',
                                     image: result.contenturl,
                                 });
                             })
                             .catch(err => {
                                 debug(err);
                                 acc({
-                                    message: 'Something went wrong',
+                                    message: 'I\'m sorry I couldn\'t help you',
                                 });
                             });
                     }

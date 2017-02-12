@@ -1,4 +1,6 @@
-all: front back push
+all: build push
+
+build: front back
 
 front:
 	docker build -t 7imbrook/sneak-speak:frontend frontend/
@@ -9,3 +11,4 @@ push:
 
 deploy:
 	docker stack deploy -c docker-compose.yml sneakspeak
+	docker service update --secret-add api_client_token sneakspeak_backend
