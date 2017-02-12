@@ -1,6 +1,11 @@
 @import 'reset';
 @import 'variables';
 
+html {
+  height: 100vh;
+  overflow: hidden;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
   overflow: hidden;
