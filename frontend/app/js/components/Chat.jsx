@@ -1,10 +1,9 @@
 import React from 'react';
-import Messages from './Messages';
+import Messages from '../containers/Messages';
 import Input from './Input';
 
 const Chat = () => (
   <div>
-    Chat
     <Messages />
     <Input />
   </div>
