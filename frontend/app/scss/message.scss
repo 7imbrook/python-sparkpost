@@ -2,7 +2,8 @@
 
 .messages {
   height: 90vh;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .message {
@@ -41,11 +42,13 @@
   }
   &.bot .from {
     float: left;
+    font-weight: bold;
   }
   &.human .from {
     float: right;
     text-align: right;
     margin-right: 25px;
+    font-weight: bold;
   }
   &:after {
     clear: both;
