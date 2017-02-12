@@ -1,5 +1,8 @@
+require('isomorphic-fetch');
 const debug = require('debug')('backend:live'),
-      apiai = require('apiai')
+      apiai = require('apiai'),
+      querystring = require('querystring').stringify,
+      flatMap = require('flatmap')
 ;
 
 const app = apiai(process.env.APIAI_TOKEN);
@@ -22,6 +25,7 @@ function handleMessage(message, sessionId) {
                 case 'display':
                 {
                     if (response.result.fulfillment.speech != '') {
+                        debug('fulfillment');
                         acc({
                             message: response.result.fulfillment.speech,
                             control: {
@@ -29,9 +33,34 @@ function handleMessage(message, sessionId) {
                             }
                         });
                     } else {
-                        acc({ message:`Here's are some ${response.result.parameters.brand} that you might like` });
+                        debug('searching');
+                        const query = querystring({
+                            q: 'image shoe ' + response.result.parameters.brand,
+                            key: 'AIzaSyBLFZunayhJJv_opd5endbUJROby0c9N90',
+                            cx: '003527602726096819603:zhnvulhmery',
+                            fields: 'items/pagemap/imageobject(description,contenturl,name)',
+                        });
+                        fetch(`https://www.googleapis.com/customsearch/v1?${query}`)
+                            .then(res => res.json())
+                            .then(images => {
+                                const image_urls = flatMap(images.items, item => item.pagemap.imageobject.map(image => image));
+                                return image_urls.filter(img => img.contenturl && img.description && img.name)
+                            })
+                            .then(res => res[0])
+                            .then(result => {
+                                acc({
+                                    message: result.description,
+                                    image: result.contenturl,
+                                });
+                            })
+                            .catch(err => {
+                                debug(err);
+                                acc({
+                                    message: 'Something went wrong',
+                                });
+                            });
                     }
-                }
+                } break;
                 case 'recommend':
                 {
                     if (response.result) {
@@ -42,7 +71,7 @@ function handleMessage(message, sessionId) {
                             }
                         });
                     }
-                }
+                } break;
                 default:
                     acc({ 
                         message: response.result.fulfillment.speech,
@@ -65,7 +94,12 @@ function onConnection(socket) {
         handleMessage(msg, socket.id)
             .then(response => {
                 debug(response);
-                socket.emit('message', response.message);
+                if (response.image) {
+                    socket.emit('image', response.image);
+                }
+                if (response.message) {
+                    socket.emit('message', response.message);
+                }
                 if (response.control) {
                     socket.emit('control', response.control);
                 }
