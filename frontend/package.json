@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=development BABEL_ENV=development node ./server.js",
-    "build": "NODE_ENV=production BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js",
+    "build": "NODE_ENV=production BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js && cp -r ./app/img/favicons/ ./dist",
     "lint": "eslint --ext .js --ext .jsx app",
     "validate": "npm ls"
   },
