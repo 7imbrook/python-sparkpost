@@ -1,6 +1,24 @@
 @import 'reset';
 @import 'variables';
 
+@keyframes listening {
+  0% {
+    font-weight: 100;
+    width: 92px;
+  }
+  25% {
+  }
+  50% {
+    width: 110px;
+  }
+  75% {
+  }
+  100% {
+    font-weight: 100;
+    width: 92px;
+  }
+}
+
 .input-bar {
   background-color: $PRIMARY;
   height: 50px;
@@ -31,6 +49,7 @@
       background-color: darken($PRIMARY, 10%);
     }
     .mic-glyph {
+      color: #ffffff;
       width: 100%;
       text-align: center;
       display: inline-block;
@@ -70,9 +89,16 @@
 
       width: 100%;
       box-sizing: border-box;
+      transition: background-color 0.3s;
+      &:disabled {
+        background-color: $PRIMARY;
+        &::-webkit-input-placeholder {
+          color: #ffffff;
+        }
+        animation-name: listening;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
     }
   }
-
-  
-
 }
