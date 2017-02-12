@@ -8,6 +8,7 @@ export default function (state = [], action) {
         {
           content: action.payload,
           timeStamp: new Date(),
+          messageFormat: action.messageFormat,
           from: BOT,
           id: state.length + 1,
         },
@@ -16,6 +17,7 @@ export default function (state = [], action) {
       return [
         ...state,
         {
+          messageFormat: action.messageFormat,
           content: action.payload,
           timeStamp: new Date(),
           from: HUMAN,

@@ -1,5 +1,9 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Message from './Message';
+// import Summary from './Summary';
+import '../../scss/animations.scss';
+
 
 class Messages extends React.Component {
   static propTypes = {
@@ -15,13 +19,26 @@ class Messages extends React.Component {
   }
 
   render() {
-    const messages = this.props.messages.map(message => (
-      <Message key={message.id} {...message} />
-    ));
+    const messages = this.props.messages.map(message =>
+      (<Message
+        key={message.id}
+        {...message}
+      />)
+    );
 
     return (
-      <div ref={(c) => { this.scroll = c; }} className="messages">
-        {messages}
+      <div
+        className="messages"
+        ref={(c) => { this.scroll = c; }}
+      >
+        <ReactCSSTransitionGroup
+          component="div"
+          transitionName="move"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          {messages}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

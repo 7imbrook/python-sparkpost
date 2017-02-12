@@ -30,7 +30,7 @@ module.exports = {
       minChunks: Infinity,
     }),
     new HtmlWebpackPlugin({
-      title: 'Webpack-React-Redux',
+      title: 'SneakSpeak',
       filename: '../index.html',
       template: './app/index.ejs',
     }),

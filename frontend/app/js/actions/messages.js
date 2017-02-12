@@ -8,6 +8,9 @@ export const BOT_MESSAGE = 'BOT_MESSAGE';
 export const HUMAN_MESSAGE = 'HUMAN_MESSAGE';
 export const IS_SPEAKING = 'IS_SPEAKING';
 
+export const PLAINTEXT_MESSAGE = 'PLAINTEXT_MESSAGE';
+export const IMAGE_MESSAGE = 'IMAGE_MESSAGE';
+
 const path = '/socket/';
 const socket = io('/socket/message', { path });
 
@@ -27,6 +30,13 @@ socket.on('control', (msg) => {
   }
 });
 
+socket.on('image', (img) => {
+  store.dispatch(robotMessage({
+    messageFormat: IMAGE_MESSAGE,
+    content: img,
+  }));
+});
+
 function robotMessage(message) {
   return (dispatch) => {
     // Emit isSpeaking
@@ -36,7 +46,8 @@ function robotMessage(message) {
     msg.onend = () => dispatch({ type: IS_SPEAKING, speaking: false });
     return dispatch({
       type: BOT_MESSAGE,
-      payload: message
+      messageFormat: message.messageFormat,
+      payload: message.content,
     });
   };
 }
@@ -46,6 +57,7 @@ export function humanMessage(message) {
     socket.emit('message', message);
     return dispatch({
       type: HUMAN_MESSAGE,
+      messageFormat: PLAINTEXT_MESSAGE,
       payload: message,
     });
   };

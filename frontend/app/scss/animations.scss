@@ -1,0 +1,22 @@
+@import 'variables';
+
+.scale-enter {
+  transform: scale3d(3, 3, 3);
+  opacity: 0.1;
+
+  &.scale-enter-active {
+    transform: scale3d(1, 1, 1);
+    opacity: 1;
+    transition: transform 500ms, opacity 500ms;
+  }
+}
+
+.move-enter {
+  transform: translateY(20px);
+  opacity: 0.1;
+  &.move-enter-active {
+    transform: translateY(0px);
+    opacity: 1;
+    transition: transform 500ms, opacity 500ms;
+  }
+}
