@@ -23,15 +23,24 @@ const matching = {
     hello: greeting,
     hello_match(message) {
         return message.match(/(hi|hello)/);
-    }
+    },
+
+    dank(msg, res) {
+        const re = /I'm (.*)/;
+        const matches = re.exec(msg);
+        const response = `Hi ${matches[1]}! I'm shoe advisor.`;
+        res(response);
+    },
+    dank_match(message) {
+        return message.match(/I'm (.*)/);
+    },
 
 }
 
 function onConnection(socket) {
     debug('Connected user');
     socket.emit('message', 'How can I help you?');
-    socket.emit('control', { listen: true });
-
+    
     let isSpeaking = false;
     socket.on('isSpeaking', (change) => isSpeaking = change);
 
