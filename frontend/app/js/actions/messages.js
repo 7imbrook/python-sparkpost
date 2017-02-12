@@ -18,7 +18,7 @@ const path = '/socket/';
 const socket = io('/socket/message', { path });
 
 socket.on('connect', () => {
-    console.log('Yay!');
+  console.log('Yay!');
 });
 
 socket.on('message', (msg) => {
@@ -47,11 +47,17 @@ socket.on('image', (img) => {
 //   messageFormat: IMAGE_MESSAGE,
 //   content: SneakerPic,
 // }));
+//
+function goodCodeBlock(message, dispatch, getState) {
+  setTimeout(() => {
+    betterCodeBlock(message, dispatch, getState);
+  }, 500)
+}
 
-function robotMessage(message) {
-  return (dispatch) => {
-    // Emit isSpeaking
-    if(message.messageFormat === PLAINTEXT_MESSAGE) {
+function betterCodeBlock(message, dispatch, getState) {
+  const ready = getState().splash;
+  if (!ready) {
+    if (message.messageFormat === PLAINTEXT_MESSAGE) {
       const msg = new SpeechSynthesisUtterance(message.content);
       dispatch({ type: IS_SPEAKING, speaking: true });
       window.speechSynthesis.speak(msg);
@@ -62,6 +68,14 @@ function robotMessage(message) {
       messageFormat: message.messageFormat,
       payload: message.content,
     });
+  } else {
+    goodCodeBlock(message, dispatch, getState)
+  }
+}
+
+function robotMessage(message) {
+  return (dispatch, getState) => {
+    betterCodeBlock(message, dispatch, getState);
   };
 }
 

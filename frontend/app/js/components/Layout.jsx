@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from './NavBar';
 import Chat from './Chat';
-import Intro from './Intro';
+import Intro from '../containers/Intro';
 
 const Layout = () => (
   <div className="layout">
