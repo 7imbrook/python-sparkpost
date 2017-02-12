@@ -52,7 +52,7 @@ function handleMessage(message, sessionId) {
                             case 'nike':
                                 return acc({
                                     image: 'https://s3.amazonaws.com/nikeinc/assets/54343/FY16_INNO_SNOWCAP_v2_HERO_RT_NoEarl_V1_hd_1600.jpg?1458138886',
-                                    message: 'Just do it alread.'
+                                    message: 'Just do it already.'
                                 });
                         }
                         // debug('searching');
